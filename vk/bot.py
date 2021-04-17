@@ -8,6 +8,7 @@ import platform
 
 import vk.commands.start as start_cmd
 import vk.commands.bot_info as bot_info_cmd
+import vk.commands.cmd_list as cmd_list_cmd
 
 import vk.languages.ru_RU as ru_RU
 localization = ru_RU.localize()
@@ -33,7 +34,7 @@ for event in longpoll.listen():
             if event.message.text == localization['Bot information']['commands']['001'] or event.message.text == localization['Bot information']['commands']['002']:
                 bot_info_cmd.push(botconfig, event, localization, vk, VkKeyboard, VkKeyboardColor, cpuinfo, psutil, os, platform, get_random_id)
             if event.message.text == localization['Command list']['commands']['001'] or event.message.text == localization['Command list']['commands']['002']:
-                bot_info_cmd.push(botconfig, event, localization, vk, VkKeyboard, VkKeyboardColor, cpuinfo, psutil, os, platform, get_random_id)
+                cmd_list.push(botconfig, event, localization, vk, VkKeyboard, VkKeyboardColor, cpuinfo, psutil, os, platform, get_random_id)
         except Exception as e:
             print(e)
 

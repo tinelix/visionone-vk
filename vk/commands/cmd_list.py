@@ -4,11 +4,11 @@ def push(botconfig, event, localization, vk, VkKeyboard, VkKeyboardColor, get_ra
         vk.messages.send(
             random_id=0,
             peer_id=event.message.peer_id,
-            message=localization['Command list']['message']
+            message=localization['Commands list']['message']
         )
     elif event.from_chat:
         vk.messages.send(
             peer_id=event.message.peer_id,
             random_id=get_random_id(),
-            message=localization['Command list']['message']
+            message=localization['Commands list']['message']
         )
