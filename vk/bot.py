@@ -28,12 +28,15 @@ print('VK Bot API connected!')
 for event in longpoll.listen():
     if event.type == VkBotEventType.MESSAGE_NEW:
         try:
-
-            if event.message.text == localization['Start']['commands']['001'] or event.message.text == localization['Start']['commands']['002']:
+            if event.from_user:
+                prefix = ''
+            elif event.from_chat:
+                prefix = botconfig['prefix']
+            if event.message.text == prefix + localization['Start']['commands']['001'] or event.message.text == prefix + localization['Start']['commands']['002']:
                 start_cmd.push(botconfig, event, localization, vk, VkKeyboard, VkKeyboardColor, get_random_id)
-            if event.message.text == localization['Bot information']['commands']['001'] or event.message.text == localization['Bot information']['commands']['002']:
+            if event.message.text == prefix + localization['Bot information']['commands']['001'] or event.message.text == prefix + localization['Bot information']['commands']['002']:
                 bot_info_cmd.push(botconfig, event, localization, vk, VkKeyboard, VkKeyboardColor, cpuinfo, psutil, os, platform, get_random_id)
-            if event.message.text == localization['Commands list']['commands']['001'] or event.message.text == localization['Commands list']['commands']['002']:
+            if event.message.text == prefix + localization['Commands list']['commands']['001'] or event.message.text == prefix + localization['Commands list']['commands']['002']:
                 cmd_list_cmd.push(botconfig, event, localization, vk, VkKeyboard, VkKeyboardColor, get_random_id)
         except Exception as e:
             print(e)
