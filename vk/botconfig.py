@@ -14,5 +14,5 @@ botconfig = {
     'accent3': 0x6eda5f,
     'version': '01A1-VK-210417',
     'owner': '741883312108339231',
-    'logs_channel': 788723868255649832,
+    'prefix': '[club202978127|@tinelix_visionone] '
 }

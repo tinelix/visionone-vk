@@ -27,10 +27,13 @@ print('VK Bot API connected!')
 for event in longpoll.listen():
     if event.type == VkBotEventType.MESSAGE_NEW:
         try:
+
             if event.message.text == localization['Start']['commands']['001'] or event.message.text == localization['Start']['commands']['002']:
                 start_cmd.push(botconfig, event, localization, vk, VkKeyboard, VkKeyboardColor, get_random_id)
             if event.message.text == localization['Bot information']['commands']['001'] or event.message.text == localization['Bot information']['commands']['002']:
                 bot_info_cmd.push(botconfig, event, localization, vk, VkKeyboard, VkKeyboardColor, cpuinfo, psutil, os, platform, get_random_id)
-        except e as Exception:
+            if event.message.text == localization['Command list']['commands']['001'] or event.message.text == localization['Command list']['commands']['002']:
+                bot_info_cmd.push(botconfig, event, localization, vk, VkKeyboard, VkKeyboardColor, cpuinfo, psutil, os, platform, get_random_id)
+        except Exception as e:
             print(e)
 
