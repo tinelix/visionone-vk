@@ -1,6 +1,7 @@
 const vk = require('node-vk-bot-api');
 const fs = require('fs');
 const os = require('os');
+const strftime = require('strftime')
 const lang = require("./languages/ru.js");
 const config = require("./config.js");
 
@@ -27,9 +28,9 @@ bot.on((ctx) => {
         if (ctx.message.text == prefix + lang.start_command) {
             commands.get('start').execute(vk, bot, prefix, lang, config, ctx, Markup)
         } else if (ctx.message.text == prefix + lang.user_command) {
-            commands.get('underconstr').execute(vk, bot, prefix, lang, config, ctx, Markup)
+            commands.get('user').execute(vk, bot, prefix, lang, config, ctx, Markup, strftime)
         } else if (ctx.message.text == prefix + lang.conv_command) {
-            commands.get('underconstr').execute(vk, bot, prefix, lang, config, ctx, Markup)
+            commands.get('conv').execute(vk, bot, prefix, lang, config, ctx, Markup, strftime)
         } else if (ctx.message.text == prefix + lang.cmds_list_command) {
             commands.get('cmd_list').execute(vk, bot, prefix, lang, config, ctx, Markup)
         }
