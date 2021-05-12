@@ -3,6 +3,21 @@ const fs = require('fs');
 const os = require('os');
 const strftime = require('strftime')
 const math = require('mathjs');
+const http = require('http');
+
+const host = '0.0.0.0';
+const port = 8080;
+
+const requestListener = function (req, res) {
+    res.setHeader("Content-Type", "text/html");
+    res.writeHead(200);
+    res.end(`<html><body>Pong!</body></html>`);
+};
+
+const server = http.createServer(requestListener);
+server.listen(port, host, () => {
+    console.log(`Server is running on http://${host}:${port}`);
+});
 
 const lang = require("./languages/ru.js");
 const config = require("./config.js");
@@ -16,7 +31,7 @@ const bot = new vk(config['token']);
 let prefix = ""
 
 let commands = new Map()
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./vk/commands').filter(file => file.endsWith('.js'));
 const session = new Session();
 
 for (const file of commandFiles) {
@@ -43,10 +58,10 @@ const calc = new Scene('calc',
     }
 );
 
+
 const stage = new Stage(crystball, calc);
 bot.use(session.middleware());
 bot.use(stage.middleware());
-
 
 bot.on((ctx) => {
     try {
@@ -73,6 +88,9 @@ bot.on((ctx) => {
     }
 });
 
-
-
-bot.startPolling();
+bot.startPolling((err) => {
+    console.log(`${config.bot_name} bot (VK) started!\n\n`);
+  if (err) {
+    console.log(err);
+  }
+});
